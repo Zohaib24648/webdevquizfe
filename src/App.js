@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { NotificationContainer } from "react-notifications";
+import { useSelector } from "react-redux";
+import UserPage from "./components/userPage"; // Ensure you have this component
+import LoginForm from "./components/LoginForm"; // LoginForm example provided below
 
 function App() {
+  const { loggedIn } = useSelector((state) => state.user);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {loggedIn ? <UserPage /> : <LoginForm />}
+      <NotificationContainer />
     </div>
   );
 }
