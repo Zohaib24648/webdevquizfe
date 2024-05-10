@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 function FAQList() {
   const [faqs, setFaqs] = useState([]);
@@ -15,15 +17,21 @@ function FAQList() {
   }, []);
 
   return (
-    <div>
-      <h2>Frequently Asked Questions</h2>
-      {faqs.map(faq => (
-        <div key={faq.id}>
-          <h3>{faq.question}</h3>
-          <p dangerouslySetInnerHTML={{ __html: faq.answer }} />
-        </div>
+    <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        Frequently Asked Questions
+      </Typography>
+      {faqs.map((faq) => (
+        <Accordion key={faq.id}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="h6">{faq.question}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography dangerouslySetInnerHTML={{ __html: faq.answer }} />
+          </AccordionDetails>
+        </Accordion>
       ))}
-    </div>
+    </Container>
   );
 }
 
